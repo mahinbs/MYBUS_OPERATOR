@@ -1,0 +1,78 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.min.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --app-surface: #f0f0f5;
+    --app-brand: #7c3aed;
+    --app-brand-deep: #4c1d95;
+    --app-header-from: #1a0b2e;
+    --app-header-via: #2d1b4e;
+    --radius-screen: 1.75rem;
+    --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 16px rgb(15 23 42 / 0.06);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply text-slate-900 antialiased;
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+  }
+
+  ::selection {
+    background-color: rgb(167 139 250 / 0.35);
+    color: inherit;
+  }
+
+  /* Focus visible for keyboard users — components can override */
+  :where(button, a, input, textarea, select):focus-visible {
+    @apply outline-none ring-2 ring-violet-500 ring-offset-2 ring-offset-white;
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+  }
+
+  .pt-safe {
+    padding-top: max(0.5rem, env(safe-area-inset-top, 0px));
+  }
+
+  .min-h-app {
+    min-height: 100dvh;
+    min-height: 100vh;
+  }
+
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Space for operator bottom nav + safe area so lists aren’t clipped */
+  .pb-nav {
+    padding-bottom: calc(8rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Extra scroll room on long pages (route detail, lists) above the fixed tab bar */
+  .pb-nav-lg {
+    padding-bottom: calc(10rem + env(safe-area-inset-bottom, 0px));
+  }
+}
