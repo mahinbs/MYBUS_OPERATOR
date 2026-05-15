@@ -1,11 +1,9 @@
 /** Inline script in root layout — demo session + static-host asset paths only (skipped on localhost dev). */
 export const MYBUS_BOOTSTRAP_SCRIPT = `
 (function () {
-  var host = location.hostname;
-  var isLocalDev =
-    location.protocol.startsWith("http") &&
-    (host === "localhost" || host === "127.0.0.1" || host === "[::1]");
-  var needsPathPatch = location.protocol === "file:" || !isLocalDev;
+  var pathSegments = location.pathname.replace(/\\/+$/, "").split("/").filter(Boolean);
+  var isSubpathDeploy = pathSegments.length > 0 && !/^index\\.html?$/i.test(pathSegments[pathSegments.length - 1]);
+  var needsPathPatch = location.protocol === "file:" || (location.protocol.startsWith("http") && isSubpathDeploy);
 
   if (needsPathPatch) {
     try {

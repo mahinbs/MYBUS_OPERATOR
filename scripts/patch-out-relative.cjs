@@ -8,6 +8,11 @@
 const fs = require("fs");
 const path = require("path");
 
+if (process.env.VERCEL === "1") {
+  console.log("patch-out-relative: skipped on Vercel");
+  process.exit(0);
+}
+
 const OUT = path.join(process.cwd(), "out");
 
 function walkFiles(dir, onFile) {

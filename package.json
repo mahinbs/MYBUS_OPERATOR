@@ -3,7 +3,7 @@
     "@react-google-maps/api": "^2.19.3",
     "framer-motion": "12.23.12",
     "lucide-react": "0.539.0",
-    "next": "15.3.2",
+    "next": "15.3.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recharts": "^3.0.2"
@@ -23,13 +23,17 @@
   "private": true,
   "scripts": {
     "clean": "node -e \"const fs=require('fs');const p='.next';if(fs.existsSync(p))fs.rmSync(p,{recursive:true,force:true});console.log('Removed .next');\"",
-    "build": "next build && node scripts/patch-out-relative.cjs",
-    "build:relative": "npm run build",
+    "build": "next build",
+    "build:static": "next build && node scripts/patch-out-relative.cjs",
+    "build:relative": "npm run build:static",
     "start": "npm run dev:fast",
     "dev": "npm run clean && cross-env NODE_ENV=development next dev -H 0.0.0.0 -p 3000",
     "dev:fast": "cross-env NODE_ENV=development next dev -H 0.0.0.0 -p 3000",
     "lint": "next lint",
     "serve:out": "npx --yes serve out -p 4173"
   },
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=20"
+  }
 }
